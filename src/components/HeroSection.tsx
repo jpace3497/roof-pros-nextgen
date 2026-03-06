@@ -1,17 +1,22 @@
 import { Phone, ArrowRight, Shield, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-roofing.jpg";
+
 const HeroSection = () => {
   const badges = [
     { icon: Shield, label: "Licensed & Insured" },
     { icon: Star, label: "5-Star Rated" },
-    { icon: MapPin, label: "Serving the Tri-State Area" },
+    { icon: MapPin, label: "Serving Massachusetts" },
   ];
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20">
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0">
-        <img src={heroImage} alt="Luxury home with premium roofing" className="w-full h-full object-cover" />
+        <img
+          src={heroImage}
+          alt="Luxury home with premium roofing"
+          className="w-full h-full object-cover animate-hero-zoom"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy/85 to-navy/50" />
       </div>
 
@@ -31,7 +36,7 @@ const HeroSection = () => {
             Premium roofing solutions backed by 20+ years of experience. Quality craftsmanship, honest pricing, and results that last a lifetime.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16 opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <a href="#contact">
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-accent-foreground font-bold text-base rounded-xl px-8 py-6 shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/30 transition-all duration-300">
                 Get Free Quote
@@ -44,6 +49,16 @@ const HeroSection = () => {
                 Call Now
               </Button>
             </a>
+          </div>
+
+          {/* Trust Rating */}
+          <div className="flex items-center gap-2 mb-12 opacity-0 animate-fade-up" style={{ animationDelay: "0.35s" }}>
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+              ))}
+            </div>
+            <span className="text-primary-foreground/70 text-sm font-medium">4.9 Rating from 200+ Homeowners</span>
           </div>
 
           <div className="flex flex-wrap gap-6 opacity-0 animate-fade-up" style={{ animationDelay: "0.4s" }}>

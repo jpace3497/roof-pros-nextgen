@@ -4,8 +4,8 @@ import before2 from "@/assets/before2.jpg";
 import after2 from "@/assets/after2.jpg";
 
 const comparisons = [
-  { before: before1, after: after1, title: "Residential Shingle Replacement" },
-  { before: before2, after: after2, title: "Commercial Flat Roof Repair" },
+  { before: before1, after: after1, title: "Storm Damage Replacement", caption: "Complete tear-off and re-roof after severe nor'easter damage in Worcester, MA." },
+  { before: before2, after: after2, title: "Full Shingle Roof Replacement", caption: "Aging asphalt shingles replaced with premium architectural shingles in Newton, MA." },
 ];
 
 const BeforeAfterSection = () => (
@@ -22,15 +22,16 @@ const BeforeAfterSection = () => (
           <div key={c.title} className="space-y-4">
             <h3 className="font-heading font-bold text-lg text-foreground text-center">{c.title}</h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative rounded-xl overflow-hidden shadow-card">
-                <img src={c.before} alt="Before" className="w-full aspect-[4/3] object-cover" />
-                <span className="absolute top-3 left-3 bg-destructive text-destructive-foreground text-xs font-bold px-3 py-1 rounded-full">Before</span>
+              <div className="relative rounded-xl overflow-hidden shadow-card group">
+                <img src={c.before} alt={`Before - ${c.title}`} className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105" />
+                <span className="absolute top-3 left-3 bg-destructive text-destructive-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-md">Before</span>
               </div>
-              <div className="relative rounded-xl overflow-hidden shadow-card">
-                <img src={c.after} alt="After" className="w-full aspect-[4/3] object-cover" />
-                <span className="absolute top-3 left-3 bg-gold text-accent-foreground text-xs font-bold px-3 py-1 rounded-full">After</span>
+              <div className="relative rounded-xl overflow-hidden shadow-card group">
+                <img src={c.after} alt={`After - ${c.title}`} className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105" />
+                <span className="absolute top-3 left-3 bg-emerald-500 text-primary-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-md">After</span>
               </div>
             </div>
+            <p className="text-muted-foreground text-sm text-center">{c.caption}</p>
           </div>
         ))}
       </div>
