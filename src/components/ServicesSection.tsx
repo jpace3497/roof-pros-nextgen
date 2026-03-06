@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import serviceReplacement from "@/assets/service-replacement.jpg";
 import serviceRepair from "@/assets/service-repair.jpg";
 import serviceStorm from "@/assets/service-storm.jpg";
@@ -47,6 +48,21 @@ const ServicesSection = () => (
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <a
+          href="#estimate-tool"
+          onClick={(e) => {
+            e.preventDefault();
+            document.getElementById("estimate-tool")?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <Button size="lg" className="bg-gold hover:bg-gold-dark text-accent-foreground font-bold text-base rounded-xl px-10 py-6 shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/30 transition-all duration-300">
+            Get Pricing
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </a>
       </div>
     </div>
   </section>
