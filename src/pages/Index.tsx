@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ChatBubble from "@/components/ChatBubble";
 import ServicesSection from "@/components/ServicesSection";
 import ServicesCTA from "@/components/ServicesCTA";
 import EstimateToolSection from "@/components/EstimateToolSection";
