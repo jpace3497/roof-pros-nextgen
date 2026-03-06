@@ -1,12 +1,17 @@
-import { Home, Wrench, CloudLightning, Search, AlertTriangle, Droplets } from "lucide-react";
+import serviceReplacement from "@/assets/service-replacement.jpg";
+import serviceRepair from "@/assets/service-repair.jpg";
+import serviceStorm from "@/assets/service-storm.jpg";
+import serviceInspection from "@/assets/service-inspection.jpg";
+import serviceEmergency from "@/assets/service-emergency.jpg";
+import serviceGutter from "@/assets/service-gutter.jpg";
 
 const services = [
-  { icon: Home, title: "Roof Replacement", desc: "Complete tear-off and installation with premium materials and industry-leading warranties." },
-  { icon: Wrench, title: "Roof Repair", desc: "Fast, reliable repairs for leaks, damaged shingles, flashing issues, and more." },
-  { icon: CloudLightning, title: "Storm Damage Repair", desc: "Emergency response for hail, wind, and storm damage. We work with your insurance." },
-  { icon: Search, title: "Roof Inspection", desc: "Comprehensive inspections with detailed reports to catch problems before they grow." },
-  { icon: AlertTriangle, title: "Emergency Roof Repair", desc: "24/7 emergency services to protect your home when disaster strikes." },
-  { icon: Droplets, title: "Gutter Installation", desc: "Seamless gutter systems to protect your foundation and landscaping." },
+  { image: serviceReplacement, title: "Roof Replacement", desc: "Complete tear-off and installation with premium materials and industry-leading warranties." },
+  { image: serviceRepair, title: "Roof Repair", desc: "Fast, reliable repairs for leaks, damaged shingles, flashing issues, and more." },
+  { image: serviceStorm, title: "Storm Damage Repair", desc: "Emergency response for hail, wind, and storm damage. We work with your insurance." },
+  { image: serviceInspection, title: "Roof Inspection", desc: "Comprehensive inspections with detailed reports to catch problems before they grow." },
+  { image: serviceEmergency, title: "Emergency Roof Repair", desc: "24/7 emergency services to protect your home when disaster strikes." },
+  { image: serviceGutter, title: "Gutter Installation", desc: "Seamless gutter systems to protect your foundation and landscaping." },
 ];
 
 const ServicesSection = () => (
@@ -22,13 +27,18 @@ const ServicesSection = () => (
         {services.map((s) => (
           <div
             key={s.title}
-            className="group bg-card rounded-2xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 border border-border/50"
+            className="group relative rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 cursor-pointer h-80"
           >
-            <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mb-5 group-hover:bg-gold/20 transition-colors">
-              <s.icon className="w-7 h-7 text-gold" />
+            <img
+              src={s.image}
+              alt={s.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/95 via-navy/60 to-transparent transition-opacity duration-500" />
+            <div className="relative h-full flex flex-col justify-end p-8 text-center">
+              <h3 className="text-xl font-heading font-bold text-primary-foreground mb-2">{s.title}</h3>
+              <p className="text-primary-foreground/70 text-sm leading-relaxed">{s.desc}</p>
             </div>
-            <h3 className="text-xl font-heading font-bold text-foreground mb-3">{s.title}</h3>
-            <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
           </div>
         ))}
       </div>
