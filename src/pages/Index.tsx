@@ -28,6 +28,7 @@ const Index = () => (
     <ReviewsSection />
     <ContactSection />
     <Footer />
+    <ChatBubble />
   </div>
 );
 
