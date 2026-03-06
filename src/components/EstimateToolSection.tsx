@@ -59,26 +59,26 @@ const EstimateToolSection = () => {
 
         <div className="max-w-2xl mx-auto">
           {/* Step Indicator */}
-          <div className="flex items-center justify-between mb-8 px-4">
+          <div className="flex items-center justify-center mb-8 px-4">
             {steps.map((step, i) => (
-              <div key={step.num} className="flex items-center flex-1">
-                <div className="flex flex-col items-center text-center flex-shrink-0">
+              <div key={step.num} className="flex items-center">
+                <div className="flex flex-col items-center text-center w-24 sm:w-32">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
                     currentStep >= step.num
                       ? "bg-gold text-accent-foreground shadow-md shadow-gold/25"
-                      : "bg-muted text-muted-foreground"
+                      : "bg-primary-foreground/15 text-primary-foreground/40"
                   }`}>
                     <step.icon className="w-4 h-4" />
                   </div>
                   <span className={`text-xs font-semibold mt-2 transition-colors duration-300 hidden sm:block ${
-                    currentStep >= step.num ? "text-foreground" : "text-muted-foreground"
+                    currentStep >= step.num ? "text-primary-foreground" : "text-primary-foreground/40"
                   }`}>
                     {step.label}
                   </span>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-3 mt-[-1rem] sm:mt-0 rounded transition-colors duration-300 ${
-                    currentStep > step.num ? "bg-gold" : "bg-border"
+                  <div className={`w-16 sm:w-24 h-0.5 rounded transition-colors duration-300 -mt-5 sm:mt-0 ${
+                    currentStep > step.num ? "bg-gold" : "bg-primary-foreground/15"
                   }`} />
                 )}
               </div>
