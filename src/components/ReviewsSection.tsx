@@ -48,7 +48,7 @@ const ReviewsSection = () => {
     const animate = () => {
       const el = scrollRef.current;
       if (el) {
-        pos += 0.3;
+        pos += 0.18;
         if (pos >= el.scrollWidth / 2) pos = 0;
         el.scrollLeft = pos;
       }
