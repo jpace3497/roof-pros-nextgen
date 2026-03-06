@@ -1,7 +1,6 @@
 import { Phone, ArrowRight, Shield, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImg from "@/assets/hero-roofing.jpg";
-
+import heroVideo from "@/assets/hero-roofing-video.mp4";
 const HeroSection = () => {
   const badges = [
     { icon: Shield, label: "Licensed & Insured" },
@@ -12,7 +11,9 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Professional roofing work" className="w-full h-full object-cover" />
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy/85 to-navy/50" />
       </div>
 
@@ -40,7 +41,7 @@ const HeroSection = () => {
               </Button>
             </a>
             <a href="tel:+15551234567">
-              <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 font-bold text-base rounded-xl px-8 py-6">
+              <Button size="lg" className="bg-primary-foreground/15 backdrop-blur-sm border-2 border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/25 font-bold text-base rounded-xl px-8 py-6">
                 <Phone className="w-5 h-5 mr-2" />
                 Call Now
               </Button>
