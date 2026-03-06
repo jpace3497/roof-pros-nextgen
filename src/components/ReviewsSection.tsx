@@ -72,6 +72,8 @@ const ReviewsSection = () => {
 
       <div
         ref={scrollRef}
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
         className="flex overflow-hidden"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
