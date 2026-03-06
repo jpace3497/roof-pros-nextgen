@@ -40,6 +40,7 @@ const ReviewCard = ({ review }: { review: typeof reviews[0] }) => (
 
 const ReviewsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
 
   useEffect(() => {
     let pos = 0;
@@ -47,7 +48,7 @@ const ReviewsSection = () => {
 
     const animate = () => {
       const el = scrollRef.current;
-      if (el) {
+      if (el && !pausedRef.current) {
         pos += 0.18;
         if (pos >= el.scrollWidth / 2) pos = 0;
         el.scrollLeft = pos;
@@ -71,6 +72,8 @@ const ReviewsSection = () => {
 
       <div
         ref={scrollRef}
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
         className="flex overflow-hidden"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
       >
