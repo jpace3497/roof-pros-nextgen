@@ -1,4 +1,4 @@
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, Mail } from "lucide-react";
 
 const Footer = () => (
   <footer className="bg-navy-dark py-16">
@@ -22,7 +22,8 @@ const Footer = () => (
             <li>Roof Replacement</li>
             <li>Roof Repair</li>
             <li>Storm Damage</li>
-            <li>Inspections</li>
+            <li>Roof Inspection</li>
+            <li>Emergency Roof Repair</li>
             <li>Gutter Installation</li>
           </ul>
         </div>
@@ -47,16 +48,20 @@ const Footer = () => (
               <Phone className="w-4 h-4 text-gold" />
               <a href="tel:+15551234567" className="hover:text-gold transition-colors">(555) 123-4567</a>
             </div>
+            <div className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-gold" />
+              <span>info@peakroof.com</span>
+            </div>
             <div className="flex items-start gap-2">
               <MapPin className="w-4 h-4 text-gold mt-0.5" />
-              <span>Greater Cincinnati, OH</span>
+              <span>Greater Boston, MA</span>
             </div>
           </div>
         </div>
       </div>
 
       <div className="border-t border-primary-foreground/10 pt-8 text-center text-sm text-primary-foreground/40">
-        © {new Date().getFullYear()} PeakRoof Roofing Co. All rights reserved.
+        © 2025 PeakRoof Roofing Co. All Rights Reserved.
       </div>
     </div>
   </footer>

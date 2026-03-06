@@ -101,3 +101,12 @@ html {
 .overflow-hidden::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes hero-zoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 20s ease-out forwards;
+}

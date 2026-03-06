@@ -10,6 +10,10 @@ const CTASection = () => (
       className="absolute inset-0 w-full h-full object-cover"
     />
     <div className="absolute inset-0 bg-navy-dark/90" />
+    {/* Subtle roof pattern overlay */}
+    <div className="absolute inset-0 opacity-[0.03]" style={{
+      backgroundImage: `repeating-linear-gradient(120deg, transparent, transparent 40px, hsl(var(--primary-foreground)) 40px, hsl(var(--primary-foreground)) 41px)`,
+    }} />
     <div className="relative container mx-auto px-4 lg:px-8 text-center">
       <h2 className="text-3xl lg:text-5xl xl:text-6xl font-heading font-extrabold text-primary-foreground mb-6 max-w-4xl mx-auto leading-tight">
         Need Roofing Help? Get Your Free Estimate Today.
@@ -25,9 +29,9 @@ const CTASection = () => (
           </Button>
         </a>
         <a href="tel:+15551234567">
-          <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-bold text-lg rounded-xl px-12 py-7">
+          <Button size="lg" className="border-2 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 font-bold text-lg rounded-xl px-12 py-7">
             <Phone className="w-5 h-5 mr-2" />
-            Call Now
+            Call (555) 123-4567
           </Button>
         </a>
       </div>
