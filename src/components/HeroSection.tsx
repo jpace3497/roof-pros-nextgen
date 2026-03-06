@@ -11,7 +11,9 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20">
       <div className="absolute inset-0">
-        <img src={heroImg} alt="Professional roofing work" className="w-full h-full object-cover" />
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+          <source src={heroVideo} type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy/85 to-navy/50" />
       </div>
 
