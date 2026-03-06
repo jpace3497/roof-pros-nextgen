@@ -96,3 +96,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Hide scrollbars for infinite scroll */
+.overflow-hidden::-webkit-scrollbar {
+  display: none;
+}
