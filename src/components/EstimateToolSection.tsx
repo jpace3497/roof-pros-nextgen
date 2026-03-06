@@ -45,7 +45,7 @@ const EstimateToolSection = () => {
   };
 
   return (
-    <section id="estimate-tool" className="py-20 lg:py-28 bg-surface relative">
+    <section id="estimate-tool" className="py-20 lg:py-28 bg-navy relative">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-gold font-semibold text-sm uppercase tracking-widest">Pricing Tool</span>
