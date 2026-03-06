@@ -1,7 +1,6 @@
 import { Phone, ArrowRight, Shield, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImg from "@/assets/hero-roofing.jpg";
-
+import heroVideo from "@/assets/hero-roofing-video.mp4";
 const HeroSection = () => {
   const badges = [
     { icon: Shield, label: "Licensed & Insured" },
