@@ -49,10 +49,10 @@ const EstimateToolSection = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-gold font-semibold text-sm uppercase tracking-widest">Pricing Tool</span>
-          <h2 className="text-3xl lg:text-5xl font-heading font-extrabold text-foreground mt-3 mb-4">
+          <h2 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mt-3 mb-4">
             Get Your Instant Roof Estimate
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-primary-foreground/60 text-lg">
             Answer a few quick questions to see a rough price range for your roofing project.
           </p>
         </div>
