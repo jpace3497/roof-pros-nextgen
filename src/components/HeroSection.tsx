@@ -1,6 +1,6 @@
 import { Phone, ArrowRight, Shield, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroVideo from "@/assets/hero-roofing-video.mp4";
+import heroImage from "@/assets/hero-roofing.jpg";
 const HeroSection = () => {
   const badges = [
     { icon: Shield, label: "Licensed & Insured" },
@@ -11,9 +11,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20">
       <div className="absolute inset-0">
-        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        <img src={heroImage} alt="Luxury home with premium roofing" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/95 via-navy/85 to-navy/50" />
       </div>
 
