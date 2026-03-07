@@ -1,27 +1,44 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom"
 
-const queryClient = new QueryClient();
+function DemoPage() {
+  const { company } = useParams()
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  const companyName = company
+    ? company.replace(/-/g, " ")
+    : "Your Roofing Company"
 
-export default App;
+  return (
+    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+      <h1>{companyName}</h1>
+      <h2>Your Roof. Our Priority.</h2>
+
+      <p>
+        This is a demo website mockup built for {companyName}.
+      </p>
+
+      <button style={{ padding: "12px 20px" }}>
+        Get Free Roof Inspection
+      </button>
+    </div>
+  )
+}
+
+function Home() {
+  return (
+    <div style={{ padding: "40px" }}>
+      <h1>Roof Demo</h1>
+      <p>Demo generator for roofing companies.</p>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:company" element={<DemoPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
