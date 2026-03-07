@@ -10,6 +10,6 @@ return (
 export default function App() {
 return ( <Router> <Routes>
 <Route path="/" element={<Home />} />
-<Route path=":company" element={<DemoPage />} /> </Routes> </Router>
+<Route path="/:company" element={<DemoPage />} /> </Routes> </Router>
 );
 }
