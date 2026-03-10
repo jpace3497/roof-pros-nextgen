@@ -1,15 +1,30 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DemoPage from "./pages/[company]";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-function Home() {
-return (
-<div style={{ padding: "40px", fontFamily: "Arial" }}> <h1>Roof Demo</h1> <p>Demo generator for roofing companies.</p> </div>
-);
-}
+const queryClient = new QueryClient();
 
-export default function App() {
-return ( <BrowserRouter> <Routes>
-<Route path="/" element={<Home />} />
-<Route path="/:company" element={<DemoPage />} /> </Routes> </BrowserRouter>
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/:slug" element={<Index />} />
+          <Route path="/:slug/:city" element={<Index />} />
+          <Route path="/:slug/:city/:state" element={<Index />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
 );
-}
+
+export default App;

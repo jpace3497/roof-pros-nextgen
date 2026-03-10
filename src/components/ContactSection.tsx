@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import type { LeadData } from "@/types/lead";
+import { phoneTelHref } from "@/hooks/useLeadData";
+
+interface ContactSectionProps {
+  lead: LeadData;
+}
 
 const trustBadges = [
   "Free Roof Inspection",
@@ -11,9 +17,17 @@ const trustBadges = [
   "Fast Response Time",
 ];
 
-const ContactSection = () => {
+const ContactSection = ({ lead }: ContactSectionProps) => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+
+  const serviceArea = lead.city && lead.state
+    ? `Greater ${lead.city}, ${lead.state} & surrounding areas`
+    : lead.city
+      ? `Greater ${lead.city} & surrounding areas`
+      : lead.state
+        ? `${lead.state} & surrounding areas`
+        : "Your area & surrounding communities";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,31 +67,35 @@ const ContactSection = () => {
           </form>
 
           <div className="lg:col-span-2 space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
-                <Phone className="w-6 h-6 text-gold" />
+            {lead.phone && (
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
+                  <Phone className="w-6 h-6 text-gold" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-foreground">Call Us</h4>
+                  <a href={phoneTelHref(lead.phone)} className="text-muted-foreground hover:text-gold transition-colors">{lead.phone}</a>
+                </div>
               </div>
-              <div>
-                <h4 className="font-heading font-bold text-foreground">Call Us</h4>
-                <a href="tel:+15551234567" className="text-muted-foreground hover:text-gold transition-colors">(555) 123-4567</a>
+            )}
+            {lead.email && (
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
+                  <Mail className="w-6 h-6 text-gold" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-foreground">Email Us</h4>
+                  <a href={`mailto:${lead.email}`} className="text-muted-foreground hover:text-gold transition-colors">{lead.email}</a>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
-                <Mail className="w-6 h-6 text-gold" />
-              </div>
-              <div>
-                <h4 className="font-heading font-bold text-foreground">Email Us</h4>
-                <span className="text-muted-foreground">info@peakroof.com</span>
-              </div>
-            </div>
+            )}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center shrink-0">
                 <MapPin className="w-6 h-6 text-gold" />
               </div>
               <div>
                 <h4 className="font-heading font-bold text-foreground">Service Area</h4>
-                <span className="text-muted-foreground">Greater Boston, MA & surrounding areas</span>
+                <span className="text-muted-foreground">{serviceArea}</span>
               </div>
             </div>
           </div>

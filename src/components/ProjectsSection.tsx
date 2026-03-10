@@ -5,48 +5,67 @@ import project3 from "@/assets/project3.jpg";
 import project4 from "@/assets/project4.jpg";
 import project5 from "@/assets/project5.jpg";
 import project6 from "@/assets/project6.jpg";
+import type { LeadData } from "@/types/lead";
 
-const projects = [
-  { img: project1, title: "Architectural Shingle Roof Replacement", location: "Worcester, MA", type: "Full Replacement", duration: "Completed in 3 Days" },
-  { img: project2, title: "Standing Seam Metal Roof", location: "Springfield, MA", type: "New Installation", duration: "Completed in 5 Days" },
-  { img: project3, title: "Historic Slate Roof Restoration", location: "Cambridge, MA", type: "Restoration", duration: "Completed in 7 Days" },
-  { img: project4, title: "Colonial Re-Roof & Gutter System", location: "Newton, MA", type: "Re-Roof + Gutters", duration: "Completed in 4 Days" },
-  { img: project5, title: "Storm Damage Emergency Repair", location: "Framingham, MA", type: "Emergency Repair", duration: "Completed in 1 Day" },
-  { img: project6, title: "Modern Flat Roof with TPO Membrane", location: "Brookline, MA", type: "Commercial", duration: "Completed in 6 Days" },
+interface ProjectsSectionProps {
+  lead: LeadData;
+}
+
+const baseProjects = [
+  { img: project1, title: "Architectural Shingle Roof Replacement", type: "Full Replacement", duration: "Completed in 3 Days" },
+  { img: project2, title: "Standing Seam Metal Roof", type: "New Installation", duration: "Completed in 5 Days" },
+  { img: project3, title: "Historic Slate Roof Restoration", type: "Restoration", duration: "Completed in 7 Days" },
+  { img: project4, title: "Colonial Re-Roof & Gutter System", type: "Re-Roof + Gutters", duration: "Completed in 4 Days" },
+  { img: project5, title: "Storm Damage Emergency Repair", type: "Emergency Repair", duration: "Completed in 1 Day" },
+  { img: project6, title: "Modern Flat Roof with TPO Membrane", type: "Commercial", duration: "Completed in 6 Days" },
 ];
 
-const ProjectsSection = () => (
-  <section id="projects" className="py-24 lg:py-32">
-    <div className="container mx-auto px-4 lg:px-8">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-gold font-semibold text-sm uppercase tracking-widest">Our Work</span>
-        <h2 className="text-3xl lg:text-5xl font-heading font-extrabold text-foreground mt-3 mb-4">
-          Real Roofing Projects Across Massachusetts
-        </h2>
-        <p className="text-muted-foreground text-lg">
-          See the quality craftsmanship our team delivers on every roof.
-        </p>
-      </div>
+const ProjectsSection = ({ lead }: ProjectsSectionProps) => {
+  const location = lead.city && lead.state
+    ? `${lead.city}, ${lead.state}`
+    : lead.city || lead.state || "Local Area";
 
-      {/* Top row: 2 large featured */}
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
-        {projects.slice(0, 2).map((p) => (
-          <ProjectCard key={p.title} project={p} featured />
-        ))}
-      </div>
+  const regionLabel = lead.city
+    ? `in ${lead.city}`
+    : lead.state
+      ? `Across ${lead.state}`
+      : "in Your Area";
 
-      {/* Bottom row: 4 smaller */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {projects.slice(2).map((p) => (
-          <ProjectCard key={p.title} project={p} />
-        ))}
+  const projects = baseProjects.map((p) => ({ ...p, location }));
+
+  return (
+    <section id="projects" className="py-24 lg:py-32">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-gold font-semibold text-sm uppercase tracking-widest">Our Work</span>
+          <h2 className="text-3xl lg:text-5xl font-heading font-extrabold text-foreground mt-3 mb-4">
+            Real Roofing Projects {regionLabel}
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            See the quality craftsmanship our team delivers on every roof.
+          </p>
+        </div>
+
+        {/* Top row: 2 large featured */}
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          {projects.slice(0, 2).map((p) => (
+            <ProjectCard key={p.title} project={p} featured />
+          ))}
+        </div>
+
+        {/* Bottom row: 4 smaller */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {projects.slice(2).map((p) => (
+            <ProjectCard key={p.title} project={p} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 interface ProjectCardProps {
-  project: (typeof projects)[0];
+  project: { img: string; title: string; location: string; type: string; duration: string };
   featured?: boolean;
 }
 

@@ -1,8 +1,14 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/cta-roofing-bg.jpg";
+import type { LeadData } from "@/types/lead";
+import { phoneTelHref } from "@/hooks/useLeadData";
 
-const CTASection = () => (
+interface CTASectionProps {
+  lead: LeadData;
+}
+
+const CTASection = ({ lead }: CTASectionProps) => (
   <section className="relative py-28 lg:py-36 overflow-hidden">
     <img
       src={ctaBg}
@@ -28,12 +34,14 @@ const CTASection = () => (
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </a>
-        <a href="tel:+15551234567">
-          <Button size="lg" className="border-2 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 font-bold text-lg rounded-xl px-12 py-7">
-            <Phone className="w-5 h-5 mr-2" />
-            Call (555) 123-4567
-          </Button>
-        </a>
+        {lead.phone && (
+          <a href={phoneTelHref(lead.phone)}>
+            <Button size="lg" className="border-2 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 font-bold text-lg rounded-xl px-12 py-7">
+              <Phone className="w-5 h-5 mr-2" />
+              Call {lead.phone}
+            </Button>
+          </a>
+        )}
       </div>
     </div>
   </section>
