@@ -1,7 +1,7 @@
 import type { Context } from "@netlify/functions";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2025-01-27.acacia",
 });
 
@@ -24,60 +24,37 @@ export default async (req: Request, _context: Context) => {
       });
     }
 
-    const locationLabel = [city, state].filter(Boolean).join(", ");
+    const buildPrice = process.env.STRIPE_PRICE_BUILD;
+    const hostingPrice = process.env.STRIPE_PRICE_HOSTING;
+    const domainPrice = process.env.STRIPE_PRICE_DOMAIN;
 
-    // Build line items
+    if (!buildPrice || !hostingPrice) {
+      throw new Error("Missing Stripe price environment variables");
+    }
+
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
-      // $1500 one-time website build
       {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Website Build",
-            description: `Custom roofing website for ${companyName}${locationLabel ? ` in ${locationLabel}` : ""}`,
-          },
-          unit_amount: 150000, // $1500 in cents
-        },
+        price: buildPrice,
         quantity: 1,
       },
-      // $100/month hosting & maintenance
       {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Hosting & Maintenance",
-            description: `Monthly hosting and maintenance for ${companyName} website`,
-          },
-          unit_amount: 10000, // $100 in cents
-          recurring: {
-            interval: "month",
-          },
-        },
+        price: hostingPrice,
         quantity: 1,
       },
     ];
 
-    // Optional: +$15/month domain registration
-    if (includeDomain) {
+    if (includeDomain && domainPrice) {
       lineItems.push({
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Domain Registration & Management",
-            description: "Custom domain registration and DNS management",
-          },
-          unit_amount: 1500, // $15 in cents
-          recurring: {
-            interval: "month",
-          },
-        },
+        price: domainPrice,
         quantity: 1,
       });
     }
 
-    // Build success/cancel URLs
     const siteUrl = process.env.URL || "https://roof-demo.netlify.app";
-    const demoPath = [companySlug, city?.toLowerCase(), state?.toLowerCase()].filter(Boolean).join("/");
+
+    const demoPath = [companySlug, city?.toLowerCase(), state?.toLowerCase()]
+      .filter(Boolean)
+      .join("/");
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -111,8 +88,11 @@ export default async (req: Request, _context: Context) => {
     });
   } catch (err: any) {
     console.error("[checkout] Error:", err);
+
     return new Response(
-      JSON.stringify({ error: err.message || "Failed to create checkout session" }),
+      JSON.stringify({
+        error: err.message || "Failed to create checkout session",
+      }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
