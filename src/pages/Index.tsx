@@ -54,8 +54,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {isDynamic && <PurchaseBanner lead={lead} />}
-      <Navbar lead={lead} hasBanner={isDynamic} />
+      <PurchaseBanner lead={lead} />
+      <Navbar lead={lead} hasBanner={true} />
       <HeroSection lead={lead} reviewsData={reviewsData} />
       <ServicesSection lead={lead} />
       <ServicesCTA />
